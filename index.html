@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANISGPT</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f1117;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 900px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px 22px;
+      border-bottom: 1px solid #292d38;
+      background: #151821;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 25px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 13px 16px;
+      margin-bottom: 15px;
+      border-radius: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .user {
+      margin-left: auto;
+      background: #315efb;
+    }
+
+    .ai {
+      margin-right: auto;
+      background: #20242f;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      border-top: 1px solid #292d38;
+      background: #151821;
+    }
+
+    textarea {
+      flex: 1;
+      resize: none;
+      border: none;
+      outline: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      background: #242936;
+      color: white;
+      min-height: 50px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 0 20px;
+      background: #315efb;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #244bd0;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>🤖 ANISGPT</h1>
+    <p>Ton assistant IA personnel</p>
+  </header>
+
+  <div id="chat">
+    <div class="message ai">
+      Salut 👋 Je suis ANISGPT.
+    </div>
+  </div>
+
+  <div class="input-area">
+    <textarea id="message" placeholder="Écris ton message..."></textarea>
+    <button onclick="sendMessage()">Envoyer</button>
+  </div>
+
+</div>
+
+<script>
+  function addMessage(text, type) {
+    const chat = document.getElementById("chat");
+
+    const message = document.createElement("div");
+    message.className = "message " + type;
+    message.textContent = text;
+
+    chat.appendChild(message);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("message");
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    addMessage(text, "user");
+
+    input.value = "";
+
+    addMessage(
+      "Je suis encore en cours de connexion à mon cerveau IA 🧠...",
+      "ai"
+    );
+  }
+
+  document.getElementById("message").addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>
